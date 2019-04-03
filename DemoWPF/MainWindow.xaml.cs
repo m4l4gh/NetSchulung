@@ -20,12 +20,15 @@ namespace DemoWPF
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly ConsoleApp1.LoggingService logger;
+        private readonly ConsoleApp1.ILoggingService _logger;
+        private readonly ConsoleApp1.IInitLogging _initService;
 
         public MainWindow()
         {
             InitializeComponent();
-            logger = new ConsoleApp1.LoggingService();
+            var service = new ConsoleApp1.LoggingService();            
+            _initService = service;
+            _logger = service;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -51,13 +54,15 @@ namespace DemoWPF
                 var tag = (string)btn.Tag;
                 switch (tag)
                 {
-                    case "Log":                        
-                        logger.Log("Button 1 pressed");                        
+                    case "Log":
+                        _initService.Init();
+                        _logger.Log("Button 1 pressed");                        
                         break;
 
                     case "DeleteTempLog":
-                        //logger.DeleteLine(2);
-                        logger.DeleteLastLineFromCache();
+                        _initService.Init();
+                        _logger.DeleteLine(2);
+                        //logger.DeleteLastLineFromCache();
                         break;
                     default:
                         break;

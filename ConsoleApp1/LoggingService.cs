@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    public class LoggingService
+    public class LoggingService : ILoggingService, IInitLogging
     {
 
         List<string> log = new List<string>();
