@@ -66,6 +66,10 @@
       <Project>{64137E0A-1DCD-42EF-AC42-E769814B8D56}</Project>
       <Name>ConsoleApp2</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SharedTypes\SharedTypes.csproj">
+      <Project>{088cdcd5-4428-41b2-baff-0880daffa2fd}</Project>
+      <Name>SharedTypes</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

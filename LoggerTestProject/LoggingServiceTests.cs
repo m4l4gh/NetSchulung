@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using ConsoleApp1;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 
 namespace LoggerTestProject
 {
@@ -96,6 +98,44 @@ namespace LoggerTestProject
             logger.Init();            
 
             Assert.AreNotEqual(logger.FilePath,string.Empty);
+        }
+
+        [TestMethod]
+        public void AppendLineWithModel()
+        {
+            var logger = new LoggingService();
+            logger.Init();
+
+            var path = @"C:\Users\MLAMPL\AppData\Roaming\myapp\log.txt";
+            using (var sw = new StreamWriter(path))
+            {
+                sw.Write("");
+            }
+
+            for (var i = 0; i < 4; i++)
+            {
+                logger.Log(new SharedTypes.LogLineModel { Message = "test" });
+            }
+
+            var list = new List<string>();
+
+            using (var sr = new StreamReader(@"C:\Users\MLAMPL\AppData\Roaming\myapp\log.txt"))
+            {
+                int index = -1;
+                while (!sr.EndOfStream)
+                {
+                    index++;
+                    var content = sr.ReadLine();
+                    list.Add(content);                    
+                }
+            }
+
+            var erg1 = list.Where(x => x.StartsWith("0")).Count();
+            var erg2 = list.Where(x => x.StartsWith("3")).Count();
+
+            Assert.IsTrue(erg1 == 1);
+            Assert.IsTrue(erg2 == 1);
+            Assert.IsTrue(list.Count == 4);
         }
     }
 }

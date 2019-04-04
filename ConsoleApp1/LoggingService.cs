@@ -47,6 +47,35 @@ namespace ConsoleApp1
         */
         }
 
+        public void Log(SharedTypes.LogLineModel tolog)
+        {
+            using (var sw = new StreamWriter(_logFile, append: true))
+            {
+                _currentRowIndex++;
+                tolog.RowIndex = _currentRowIndex;
+                tolog.LoggingTime = DateTime.Now;
+
+                var line = _Mapper(tolog).ToString();
+                sw.WriteLine(line);
+            }
+
+        }
+
+        private StringBuilder _Mapper (SharedTypes.LogLineModel tolog)
+        {
+            
+            var sb = new StringBuilder();
+            sb.Append(tolog.RowIndex);
+            sb.Append(" | ");
+            sb.Append(tolog.LoggingTime);
+            sb.Append(" | ");
+            sb.Append(tolog.Message);
+
+            return sb;
+            //result = $"{tolog.RowIndex} | {tolog.LoggingTime} | {tolog.Message}";
+            //return result;
+        }
+
         public void Log(string tolog)
         {            
             using (var sw = new StreamWriter(_logFile, append:true))

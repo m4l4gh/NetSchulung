@@ -99,6 +99,13 @@
       <Project>{7fad942b-b129-4bf4-b308-01fec3450de0}</Project>
       <Name>ConsoleApp1</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SharedTypes\SharedTypes.csproj">
+      <Project>{088cdcd5-4428-41b2-baff-0880daffa2fd}</Project>
+      <Name>SharedTypes</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

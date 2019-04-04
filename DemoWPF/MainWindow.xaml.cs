@@ -56,7 +56,7 @@ namespace DemoWPF
                 {
                     case "Log":
                         _initService.Init();
-                        _logger.Log("Button 1 pressed");                        
+                        _logger.Log(new SharedTypes.LogLineModel {Message = "Button 1 pressed" });                        
                         break;
 
                     case "DeleteTempLog":
